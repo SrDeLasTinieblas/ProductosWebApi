@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Application.Interfaces;
 using Biblioteca.Application.Services;
+using Biblioteca.Domain.DTOs;
 using Biblioteca.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,16 +38,16 @@ namespace testProductosWebApi.Controllers
 
         // POST: api/productos
         [HttpPost]
-        public async Task<IActionResult> PostProducto([FromBody] Product producto)
+        public async Task<IActionResult> PostProducto([FromBody] ProductDto productoDTO)
         {
-            if (producto == null)
+            if (productoDTO == null)
                 return BadRequest("Producto no puede ser nulo");
 
-            await _productoService.AddProductoAsync(producto);
-            return CreatedAtAction(nameof(GetProducto), new { id = producto.Idproducts }, producto);
+            await _productoService.AddProductoAsync(productoDTO);
+            return CreatedAtAction(nameof(GetProducto), new { id = productoDTO.CategoryId }, productoDTO);
         }
 
-        // PUT: api/productos/5z
+        // PUT: api/productos/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProducto(int id, [FromBody] Product producto)
         {

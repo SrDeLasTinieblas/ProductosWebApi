@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Application.Interfaces;
+using Biblioteca.Domain.DTOs;
 using Biblioteca.Domain.Entities;
 using Biblioteca.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -29,9 +30,22 @@ namespace Biblioteca.Infrastructure.Repositories
             return await _appDbContext.Products.FirstOrDefaultAsync(p => p.Idproducts == id);
         }
 
-        public async Task AddProductoAsync(Product producto)
+        //public async Task AddProductoAsync(ProductDto productoDTO)
+        //{
+        //    await _appDbContext.ProductDto.AddAsync(productoDTO);
+        //    await _appDbContext.SaveChangesAsync();
+        //}
+        public async Task AddProductoAsync(ProductDto productoDTO)
         {
-            await _appDbContext.Products.AddAsync(producto);
+            // Map DTO to Entity
+            var product = new Product
+            {
+                Name = productoDTO.Name,
+                Price = productoDTO.Price,
+                CategoryId = productoDTO.CategoryId
+            };
+
+            await _appDbContext.Products.AddAsync(product);
             await _appDbContext.SaveChangesAsync();
         }
 

@@ -1,4 +1,6 @@
-﻿using Biblioteca.Domain.Entities;
+﻿//using Biblioteca.Domain.Entities;
+using Biblioteca.Domain.DTOs;
+using Biblioteca.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,7 +23,7 @@ namespace Biblioteca.Infrastructure.Data
         {
             modelBuilder.Entity<Category>(entity =>
             {
-                entity.HasKey(e => e.Idcategories).HasName("PK__Categori__0A58588CB0FE152F");
+                entity.HasKey(e => e.Idcategories).HasName("PK__Categori__0A58588C15306274");
 
                 entity.Property(e => e.Idcategories).HasColumnName("IDCategories");
                 entity.Property(e => e.Name).HasMaxLength(100);
@@ -29,20 +31,20 @@ namespace Biblioteca.Infrastructure.Data
 
             modelBuilder.Entity<Product>(entity =>
             {
-                entity.HasKey(e => e.Idproducts).HasName("PK__Products__ABDAF2A80917F1CE");
+                entity.HasKey(e => e.Idproducts).HasName("PK__Products__ABDAF2A89391E230");
 
                 entity.Property(e => e.Idproducts).HasColumnName("IDProducts");
                 entity.Property(e => e.Name).HasMaxLength(100);
-                entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
 
-                //entity.HasOne(d => d.CategoryId).WithMany(p => p.Products)
-                //    .HasForeignKey(d => d.CategoryId)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_Products_Categories");
+                entity.HasOne(d => d.Category).WithMany(p => p.Products)
+                    .HasForeignKey(d => d.CategoryId)
+                    .HasConstraintName("FK__Products__Catego__5165187F");
             });
-            base.OnModelCreating(modelBuilder);
 
+            base.OnModelCreating(modelBuilder);
         }
+
 
     }
 }

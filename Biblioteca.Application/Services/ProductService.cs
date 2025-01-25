@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Application.Interfaces;
+using Biblioteca.Domain.DTOs;
 using Biblioteca.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -29,9 +30,9 @@ namespace Biblioteca.Application.Services
             return await _productoRepository.GetProductoByIdAsync(id);
         }
 
-        public async Task AddProductoAsync(Product producto)
+        public async Task AddProductoAsync(ProductDto productoDTO)
         {
-            await _productoRepository.AddProductoAsync(producto);
+            await _productoRepository.AddProductoAsync(productoDTO);
         }
 
         public async Task UpdateProductoAsync(Product producto)
