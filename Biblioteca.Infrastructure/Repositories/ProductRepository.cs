@@ -30,14 +30,8 @@ namespace Biblioteca.Infrastructure.Repositories
             return await _appDbContext.Products.FirstOrDefaultAsync(p => p.Idproducts == id);
         }
 
-        //public async Task AddProductoAsync(ProductDto productoDTO)
-        //{
-        //    await _appDbContext.ProductDto.AddAsync(productoDTO);
-        //    await _appDbContext.SaveChangesAsync();
-        //}
         public async Task AddProductoAsync(ProductDto productoDTO)
         {
-            // Map DTO to Entity
             var product = new Product
             {
                 Name = productoDTO.Name,
