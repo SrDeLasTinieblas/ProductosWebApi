@@ -13,7 +13,7 @@ namespace Biblioteca.Application.Interfaces
         Task<IEnumerable<Product>> GetAllProductosAsync();
         Task<Product> GetProductoByIdAsync(int id);
         Task AddProductoAsync(ProductDto productoDTO);
-        Task UpdateProductoAsync(Product producto);
+        Task UpdateProductoAsync(ProductDto productoDTO);
         Task DeleteProductoAsync(int id);
     }
 }

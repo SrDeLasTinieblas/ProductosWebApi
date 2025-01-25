@@ -2,6 +2,7 @@
 using Biblioteca.Domain.DTOs;
 using Biblioteca.Domain.Entities;
 using Biblioteca.Infrastructure.Data;
+using Biblioteca.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -43,10 +44,23 @@ namespace Biblioteca.Infrastructure.Repositories
             await _appDbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateProductoAsync(Product producto)
+        public async Task<string> UpdateProductoAsync(ProductDto productoDTO)
         {
-            _appDbContext.Products.Update(producto);
+            // Find existing product
+            var existingProduct = await _appDbContext.Products
+                .FirstOrDefaultAsync(p => p.Idproducts == productoDTO.Idproducts);
+
+            if (existingProduct == null)
+                throw new NotFoundException("Producto no encontrado");
+
+            // Update properties
+            existingProduct.Name = productoDTO.Name;
+            existingProduct.Price = productoDTO.Price;
+            existingProduct.CategoryId = productoDTO.CategoryId;
+
+            _appDbContext.Products.Update(existingProduct);
             await _appDbContext.SaveChangesAsync();
+            return "Producto actualizado exitosamente";
         }
 
         public async Task DeleteProductoAsync(int id)

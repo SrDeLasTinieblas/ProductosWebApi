@@ -21,7 +21,6 @@ namespace Biblioteca.Application.Services
 
         public async Task<IEnumerable<Product>> GetAllProductosAsync()
         {
-            //return (List<Product>)await _productoRepository.GetAllProductosAsync();
             return await _productoRepository.GetAllProductosAsync();
         }
 
@@ -35,9 +34,9 @@ namespace Biblioteca.Application.Services
             await _productoRepository.AddProductoAsync(productoDTO);
         }
 
-        public async Task UpdateProductoAsync(Product producto)
+        public async Task UpdateProductoAsync(ProductDto productoDTO)
         {
-            await _productoRepository.UpdateProductoAsync(producto);
+            await _productoRepository.UpdateProductoAsync(productoDTO);
         }
 
         public async Task DeleteProductoAsync(int id)

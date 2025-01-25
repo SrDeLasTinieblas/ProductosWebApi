@@ -49,12 +49,12 @@ namespace testProductosWebApi.Controllers
 
         // PUT: api/productos/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProducto(int id, [FromBody] Product producto)
+        public async Task<IActionResult> PutProducto(int id, [FromBody] ProductDto productoDTO)
         {
-            if (id != producto.Idproducts)
+            if (id != productoDTO.Idproducts)
                 return BadRequest("El ID del producto no coincide");
 
-            await _productoService.UpdateProductoAsync(producto);
+            await _productoService.UpdateProductoAsync(productoDTO);
             return NoContent();  // Devuelve 204 si la actualización fue exitosa
         }
 

@@ -18,6 +18,7 @@ namespace Biblioteca.Infrastructure.Data
         public virtual DbSet<Category> Categories { get; set; }
 
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductDto> ProductDTO { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
